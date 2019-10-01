@@ -1,15 +1,16 @@
 import ast
 from send_alerta import send_text
 from zabbix_api import ZabbixAPI
-from credentials import user, password, endereco
+from credentials import user, password, endereco, grupo_name
 
 zapi = ZabbixAPI(server=endereco)
 zapi.login(user, password)
 
 
 def get_grupos():
-    id_grupo = zapi.hostgroup.get({"filter": {"name": ['FONTE 24V', 'FONTE 48V',
-                                                       'SISTEMA SOLAR', 'COOPERCITRUS-MON-ENERGIA']}})
+    id_grupo = []
+    for names in grupo_name:
+        id_grupo = id_grupo + zapi.hostgroup.get({"filter": {"name": [names]}})
     return id_grupo
 
 
@@ -30,7 +31,7 @@ def compara_valores(dados_antigos, volt_dict):
                         .format(volt_dict[i][0], float(volt_dict[i][1]), float(dados_antigos[i][1])))
                 textemail = ('Foi identificada uma queda de {:.2f}V no(a) {} no periodo de 1 hora.\n'
                              'Favor encaminhar este chamado para análise N2.'.format(diferenca, volt_dict[i][0]))
-                #send_text(text)
+                send_text(text)
                 #send_text(textemail)
                 print(textemail)
                 print(text)
