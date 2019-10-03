@@ -13,5 +13,4 @@ while True:
     dados_antigos = open_txt()  # guarda na variável os valores da consulta anterior
     compara_valores(dados_antigos, volt_dict)  # compara os valores da consulta anterior com a atual
     salva_txt(volt_dict)  # salva no txt os valores da consulta atual
-    zapi.logout()
     time.sleep(3600)
