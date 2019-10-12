@@ -1,4 +1,4 @@
-from informacoes import *
+from informacoes import get_id_hosts, get_template
 from manipula_dados import salva_txt, open_txt, compara_valores, get_grupos
 import time
 

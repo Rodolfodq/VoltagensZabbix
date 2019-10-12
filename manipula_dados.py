@@ -26,7 +26,7 @@ def compara_valores(dados_antigos, volt_dict):
     for i in volt_dict:
         if i in dados_antigos:
             diferenca = (float(dados_antigos[i][1])) - (float(volt_dict[i][1]))
-            if diferenca >= 0.1:
+            if diferenca >= 5 and dados_antigos[i][3] != volt_dict[i][3]:
                 text = ('{}\nAtual: {:.2f}V\nAntigo: {:.2f}V'
                         .format(volt_dict[i][0], float(volt_dict[i][1]), float(dados_antigos[i][1])))
                 textemail = ('Foi identificada uma queda de {:.2f}V no(a) {} no periodo de 1 hora.\n'
